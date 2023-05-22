@@ -34,7 +34,7 @@ public class Peminjaman {
     private int periode;
 
     @Column(nullable = false)
-    private Date ranggalPengembalian;
+    private Date tanggalPengembalian;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
