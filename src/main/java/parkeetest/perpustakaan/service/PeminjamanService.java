@@ -1,11 +1,12 @@
 package parkeetest.perpustakaan.service;
 
 import parkeetest.perpustakaan.entity.Peminjaman;
+import parkeetest.perpustakaan.entity.helpers.PeminjamanRequest;
 
 import java.util.List;
 
 public interface PeminjamanService {
-    Peminjaman tambahPeminjaman(Peminjaman peminjaman);
+    Peminjaman tambahPeminjaman(PeminjamanRequest peminjamanRequest);
 
     Peminjaman peminjamanDikembalikan(Long peminjamanId);
 

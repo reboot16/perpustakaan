@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import parkeetest.perpustakaan.entity.Peminjaman;
+import parkeetest.perpustakaan.entity.helpers.PeminjamanRequest;
 import parkeetest.perpustakaan.service.PeminjamanService;
 
 import java.util.List;
@@ -15,10 +16,11 @@ import java.util.List;
 public class PeminjamanController {
     private PeminjamanService service;
 
+
     @PostMapping
-    public ResponseEntity<Peminjaman> tambahPeminjaman(@RequestBody Peminjaman peminjaman) {
-        Peminjaman peminjamanbaru = service.tambahPeminjaman(peminjaman);
-        return new ResponseEntity<>(peminjamanbaru, HttpStatus.OK);
+    public ResponseEntity<Peminjaman> tambahPeminjaman(@RequestBody PeminjamanRequest peminjaman) {
+        Peminjaman peminjamanBaru = service.tambahPeminjaman(peminjaman);
+        return new ResponseEntity<>(peminjamanBaru, HttpStatus.OK);
     }
 
     @GetMapping
@@ -51,7 +53,7 @@ public class PeminjamanController {
         return new ResponseEntity<>(peminjamanbaru, HttpStatus.OK);
     }
 
-    @PutMapping("/dikembalikan")
+    @PutMapping("{id}/dikembalikan")
     public ResponseEntity<Peminjaman> updatePeminjamanKeDikembalikan(@PathVariable("id") Long peminjamanId) {
         Peminjaman peminjamanbaru = service.peminjamanDikembalikan(peminjamanId);
         return new ResponseEntity<>(peminjamanbaru, HttpStatus.OK);
