@@ -41,11 +41,4 @@ public class BukuServiceImpl implements BukuService {
         Optional<Buku> buku = repository.findById(bukuId);
         return buku.get();
     }
-
-    @Override
-    public Buku tambahJumlahBuku(Long bukuId, int jumlah) {
-        Buku buku = repository.findById(bukuId).get();
-        buku.setJumlahTersedia(buku.getJumlahTersedia() + jumlah);
-        return repository.save(buku);
-    }
 }

@@ -18,8 +18,4 @@ public interface PeminjamanService {
     Peminjaman getPeminjamanById(Long peminjamanId);
 
     List<Peminjaman> getPengembalianOnTime();
-
-    List<Peminjaman> getPeminjamanByPeminjam(Long peminjamId);
-
-    List<Peminjaman> getPeminjamanByBuku(Long bukuId);
 }

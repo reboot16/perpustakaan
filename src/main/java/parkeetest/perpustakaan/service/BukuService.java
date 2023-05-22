@@ -10,5 +10,4 @@ public interface BukuService {
     public List<Buku> getAllBuku();
     public Buku getBukuById(Long bukuId);
 
-    public Buku tambahJumlahBuku(Long bukuId, int jumlah);
 }

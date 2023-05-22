@@ -2,8 +2,10 @@ package parkeetest.perpustakaan.service.implementation;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import parkeetest.perpustakaan.entity.Buku;
 import parkeetest.perpustakaan.entity.Peminjaman;
 import parkeetest.perpustakaan.entity.constant.PeminjamanStatus;
+import parkeetest.perpustakaan.repository.BukuRepository;
 import parkeetest.perpustakaan.repository.PeminjamanRepository;
 import parkeetest.perpustakaan.service.PeminjamanService;
 
@@ -15,12 +17,17 @@ import java.util.List;
 @Service
 public class PeminjamanServiceImpl implements PeminjamanService {
     private PeminjamanRepository repository;
+    private BukuRepository bukuRepository;
 
     @Override
     public Peminjaman tambahPeminjaman(Peminjaman peminjaman) {
         peminjaman.setStatus(PeminjamanStatus.Dipinjamkan);
         peminjaman.setTanggalPeminjaman(new Date());
         peminjaman.setTanggalPengembalian(this.determineDueDate(peminjaman.getTanggalPeminjaman(), peminjaman.getPeriode()));
+
+        Buku buku = peminjaman.getBuku();
+        buku.setJumlahTersedia(-1);
+        bukuRepository.save(buku);
 
         return repository.save(peminjaman);
     }
@@ -57,16 +64,6 @@ public class PeminjamanServiceImpl implements PeminjamanService {
     @Override
     public List<Peminjaman> getPengembalianOnTime() {
         return repository.findPeminjamanByStatus(PeminjamanStatus.Dikembalikan);
-    }
-
-    @Override
-    public List<Peminjaman> getPeminjamanByPeminjam(Long peminjamId) {
-        return repository.findPeminjamanByPeminjam(peminjamId);
-    }
-
-    @Override
-    public List<Peminjaman> getPeminjamanByBuku(Long bukuId) {
-        return repository.findPeminjamanByBuku(bukuId);
     }
 
     private Date determineDueDate(Date date, int period) {

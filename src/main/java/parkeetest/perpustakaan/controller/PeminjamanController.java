@@ -45,18 +45,6 @@ public class PeminjamanController {
         return new ResponseEntity<>(peminjaman, HttpStatus.OK);
     }
 
-    @GetMapping("/peminjam/{peminjamId}")
-    public ResponseEntity<List<Peminjaman>> getPeminjamanByPeminjam(@PathVariable("peminjamId") Long peminjamId) {
-        List<Peminjaman> peminjaman= service.getPeminjamanByPeminjam(peminjamId);
-        return new ResponseEntity<>(peminjaman, HttpStatus.OK);
-    }
-
-    @GetMapping("/buku/{bukuId}")
-    public ResponseEntity<List<Peminjaman>> getPeminjamanByBuku(@PathVariable("bukuId") Long bukuId) {
-        List<Peminjaman> peminjaman= service.getPeminjamanByBuku(bukuId);
-        return new ResponseEntity<>(peminjaman, HttpStatus.OK);
-    }
-
     @PutMapping("{id}/terlambat")
     public ResponseEntity<Peminjaman> updatePeminjamanKeTerlambat(@PathVariable("id") Long peminjamanId) {
         Peminjaman peminjamanbaru = service.peminjamanTerlambat(peminjamanId);
